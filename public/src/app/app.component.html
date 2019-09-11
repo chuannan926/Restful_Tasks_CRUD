@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <h1>Restful Tasks: {{variableName}}</h1>
+  <div>
+    <form (submit)="onSubmitComponent()">
+        <p> {{ newTask | json }} </p>
+        <input type="text" name="newTask.title"[(ngModel)]="newTask.title"/>
+        <input type="text" name="newTask.description" [(ngModel)]="newTask.description"/>
+        <input type="submit" value="Create Task"/>
+    </form>
+  </div>
+
+
+  <button (click)="getTasksComponent()">GET ALL TASKS!</button>
+
+  {{isClicked}}
+  <div *ngIf ="isClicked">
+    <p *ngFor="let task of all_tasks;let i = index;">
+      Title: {{task.title}} Description:{{task.description}}
+      <button (click)="onButtonClickParams(i)">Edit</button>
+      <button (click)="Delete(i)">Delete</button>
+    </p>  
+  </div>
+
+  <div *ngIf="one_task">
+    <p>{{one_task.title}}{{one_task.description}}</p>
+    <form (submit)="updateSubmitComponent()">
+      <input type="text" name="one_task.title"[(ngModel)]="one_task.title"/>
+      <input type="text" name="one_task.description"[(ngModel)]="one_task.description"/>
+      <input type="submit" value="update Task"/>
+    </form>
+  </div>
+
+
+
+
+
+</body>
+</html>
+<router-outlet></router-outlet>
